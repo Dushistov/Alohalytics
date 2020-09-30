@@ -41,7 +41,7 @@ SOFTWARE.
 #import <UIKit/UIDevice.h>
 #import <UIKit/UIScreen.h>
 #import <UIKit/UIApplication.h>
-#import <UIKit/UIWebView.h>
+#import <WebKit/WKWebView.h>
 #import <AdSupport/ASIdentifierManager.h>
 // Export user agent for HTTP module.
 NSString * gBrowserUserAgent = nil;
@@ -401,12 +401,28 @@ static NSString * gInstallationId = nil;
   instance.LogEvent("$launch", params);
 #if (TARGET_OS_IPHONE > 0)
   // Initialize User-Agent asynchronously and log additional system info for iOS, as it takes significant time at startup.
-  dispatch_async(dispatch_get_main_queue(), ^{
-    gBrowserUserAgent = [[[UIWebView alloc] initWithFrame:CGRectZero] stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
-    if (shouldSendUpdatedSystemInformation) {
-      LogSystemInformation(gBrowserUserAgent);
-    }
-  });
+    dispatch_async(dispatch_get_main_queue(), ^{
+        __block WKWebView *webView = [[WKWebView alloc] initWithFrame:CGRectZero];
+        [webView evaluateJavaScript: @"navigator.userAgent"
+                  completionHandler:^(id _Nullable result, NSError * _Nullable error) {
+            if (result != nil && [result isKindOfClass:[NSString class]]) {
+                gBrowserUserAgent = (NSString *)result;
+                if (shouldSendUpdatedSystemInformation) {
+                    LogSystemInformation(gBrowserUserAgent);
+                }
+            } else if (error != nil) {
+                NSLog(@"Alohalytics ERROR: can not get userAgent: %@", error);
+            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                // we need reference to webView to keep it alive until
+                // this moment to prevent errors and assertions.
+                // If webView would be destroyed before `completionHandler`
+                // would be called or right after `completionHandler` finished
+                // we many errors in log.
+               webView = nil;
+            });
+        }];
+    });
 #else
   static_cast<void>(options);  // Unused variable warning fix.
 #endif  // TARGET_OS_IPHONE

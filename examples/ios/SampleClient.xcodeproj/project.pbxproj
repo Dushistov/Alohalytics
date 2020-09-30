@@ -25,6 +25,7 @@
 		6BDEF0621A3CF2D100054FAC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6BDEF0611A3CF2D100054FAC /* Images.xcassets */; };
 		6BDEF0651A3CF2D100054FAC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6BDEF0631A3CF2D100054FAC /* LaunchScreen.xib */; };
 		6BDEF0711A3CF2D100054FAC /* SampleClientTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 6BDEF0701A3CF2D100054FAC /* SampleClientTests.m */; };
+		7A810A8D2524BF8C00E3F800 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7A810A8C2524BF8C00E3F800 /* WebKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,7 @@
 		6BDEF06A1A3CF2D100054FAC /* SampleClientTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SampleClientTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		6BDEF06F1A3CF2D100054FAC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		6BDEF0701A3CF2D100054FAC /* SampleClientTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SampleClientTests.m; sourceTree = "<group>"; };
+		7A810A8C2524BF8C00E3F800 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 			files = (
 				6BDB7FDC1AA4884B0036C3CB /* AdSupport.framework in Frameworks */,
 				6B8A73891B260D600085EFE6 /* SystemConfiguration.framework in Frameworks */,
+				7A810A8D2524BF8C00E3F800 /* WebKit.framework in Frameworks */,
 				6BD1AAFD1A8E5AD8000CB093 /* libz.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,6 +117,7 @@
 				6BDEF0531A3CF2D100054FAC /* SampleClient */,
 				6BDEF06D1A3CF2D100054FAC /* SampleClientTests */,
 				6BDEF0521A3CF2D100054FAC /* Products */,
+				7A810A8B2524BF8C00E3F800 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -168,6 +172,14 @@
 				6BDEF06F1A3CF2D100054FAC /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		7A810A8B2524BF8C00E3F800 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				7A810A8C2524BF8C00E3F800 /* WebKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
